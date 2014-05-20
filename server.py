@@ -8,11 +8,11 @@ from pyftpdlib.servers import FTPServer
 def createServer(ipaddr,username,password):
     authorizer = DummyAuthorizer();
     # create a user
-    authorizer.add_user(username, password, "?", perm="elradfmwM",
+    authorizer.add_user(username, password, "", perm="elradfmwM",
     msg_login = "You are logged in.", msg_quit = "bye.");
     
     #anon user
-    authorizer.add_anonymous("?");
+    authorizer.add_anonymous("");
     
     handler = FTPHandler;
     handler.authorizer = authorizer;
@@ -25,9 +25,9 @@ def createServer(ipaddr,username,password):
     server.max_cons_per_ip = 5;
     server.serve_forever();
 #END OF FUNCTION
+ 
 
-
-createServer("xxx.xxx.x.xxx","user","password");    
+createServer("","user","password");    
         
 
 
