@@ -12,19 +12,19 @@ def createServer(ipaddr,username,password):
     msg_login = "You are logged in.", msg_quit = "bye.");
     
     #anon user
-    authorizer.add_anonymous("?")
+    authorizer.add_anonymous("?");
     
     handler = FTPHandler;
     handler.authorizer = authorizer;
     handler.banner = "FileTransferProtocol";
     
-    server = FTPServer((ipaddr,21), handler);
+    server = FTPServer((ipaddr,6066), handler);
     
     #limits on connections to ftp server
     server.max_cons = 256;
     server.max_cons_per_ip = 5;
     server.serve_forever();
-
+#END OF FUNCTION
 
 
 createServer("xxx.xxx.x.xxx","user","password");    
