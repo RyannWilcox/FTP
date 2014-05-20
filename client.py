@@ -13,7 +13,7 @@ def connectToFtp():
     '''
     
     # For testing purposes.
-    servername = "?";
+    servername = "192.168.1.119";
     username = "user";
     password = "password";
     
@@ -27,7 +27,7 @@ def connectToFtp():
         print files;
     else:
         print "Could not log in.";
-     #endif
+    #endif
      
      # Desicions on what to do while connected
     input = 0; 
@@ -36,31 +36,52 @@ def connectToFtp():
         print "What would you like to do?";
         print "Press 1 to retrieve a file.";
         print "Press 2 to store a file.";
-        print "Press 3 to Quit";
+        print "Press 3 to change directories.";
+        print "Press 4 to Quit";
         input = raw_input(); 
-        if(input == "3"): # Quit FTP server
+        if(input == "4"): # Quit FTP server
             deciding = False;
             ftp.quit();
             print "Goodbye!";
-        if(input == "2"): # add a fo;e
-            print "You picked 2";   
+        if(input == "2"): # add a file
+            addAFile(ftp);
         if(input == "1"): # download a file
             pickAFile(ftp);
+        if(input == "3"):
+            changeDirectories(ftp);
     #endloop
 #End function
 
 # File will be downloaded into local directory
 def pickAFile(theFtp):
-    file =raw_input("\nInput file name: ");
+    file = raw_input("\nInput file name: ");
     try:
         print "Attempting to locate "+ file + "....";
         theFtp.retrbinary("RETR " + file, open(file,"wb").write);
-        print file + " has been downloaded to current directory";
+        print file + " has been downloaded to current directory\n";
     except:
         os.remove(file);
         print "File cannot be found / cannot be read \n ";
         print "\n";
 #End function
 
+def addAFile(theFtp):
+    #filename = raw_input("\n input file to be added: ");
+    filename ="test.txt";
+    try:
+        file = open(fileName,"rb");
+        theFtp.storbinary("STOR %s" % filename,file);
+        print "Added" + filename + "to server directory\n\n";
+        file.close();
+        
+    except:
+        print "File cannot be found or it cannot be read \n";
+        print "\n";
+#End function
+
+def changeDirectories(theFtp):
+    print "Directory Changed";
+#End function
+    
 connectToFtp(); # try and log in.
     
