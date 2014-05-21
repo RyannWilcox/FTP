@@ -13,7 +13,7 @@ def connectToFtp():
     '''
     
     # For testing purposes.
-    servername = "192.168.1.119";
+    servername = "xxx.xxx.x.xxx";
     username = "user";
     password = "password";
     
