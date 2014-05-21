@@ -23,8 +23,6 @@ def connectToFtp():
     
     if(ftp.login(username,password)):
         print "You are logged in."
-        files = ftp.dir();
-        print files;
     else:
         print "Could not log in.";
     #endif
@@ -33,6 +31,8 @@ def connectToFtp():
     input = 0; 
     deciding = True;
     while(deciding):
+        print ftp.pwd();
+        print ftp.dir();
         print "What would you like to do?";
         print "Press 1 to retrieve a file.";
         print "Press 2 to store a file.";
@@ -47,7 +47,7 @@ def connectToFtp():
             addAFile(ftp);
         if(input == "1"): # download a file
             pickAFile(ftp);
-        if(input == "3"):
+        if(input == "3"): # change server directories
             changeDirectories(ftp);
     #endloop
 #End function
@@ -65,22 +65,30 @@ def pickAFile(theFtp):
         print "\n";
 #End function
 
+#File is uploaded from current directory to ftp server directory
 def addAFile(theFtp):
-    #filename = raw_input("\n input file to be added: ");
-    filename ="test.txt";
+    fileName = raw_input("\nInput name of file to be uploaded: ");
     try:
         file = open(fileName,"rb");
-        theFtp.storbinary("STOR %s" % filename,file);
-        print "Added" + filename + "to server directory\n\n";
-        file.close();
-        
+        theFtp.storbinary("STOR %s" % fileName,file);
+        print "Added " + fileName + " to server directory\n\n";
+        file.close();    
     except:
         print "File cannot be found or it cannot be read \n";
         print "\n";
 #End function
 
+#Change directories in the 
 def changeDirectories(theFtp):
-    print "Directory Changed";
+    # Get the current directory for output
+    curDirectory = theFtp.pwd();
+    print "current directory: " + curDirectory;
+    dirCh = raw_input("Input directory to change to:");
+    try:
+        #Change to inputted directory
+        theFtp.cwd(dirCh);
+    except:
+        print "Could not change to that directory..";
 #End function
     
 connectToFtp(); # try and log in.
