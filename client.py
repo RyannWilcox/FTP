@@ -42,11 +42,11 @@ class Client:
                 ftp.quit();
                 print "Goodbye!";
             if(input == "2"): # add a file
-                addAFile(ftp);
+                self.addAFile(ftp);
             if(input == "1"): # download a file
                 self.pickAFile(ftp);
             if(input == "3"): # change server directories
-                changeDirectories(ftp);
+                self.changeDirectories(ftp);
         #endloop
 #End function
 
