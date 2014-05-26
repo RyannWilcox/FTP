@@ -13,10 +13,13 @@ class Server:
     
     
     
-    def createServer(self,ipaddr,username,password):
+    def createServer(self,ipaddr):
         authorizer = DummyAuthorizer();
-        # create a user
-        authorizer.add_user(username, password, "/users/ryanwilcox/server", perm="elradfmwM",
+        
+        ''' create a user
+            All login information is stored as plaintext right now.
+        '''
+        authorizer.add_user("user","password", "/users/ryanwilcox/server", perm="elradfmwM",
         msg_login = "You are logged in.", msg_quit = "bye.");
     
         #anon user
@@ -37,7 +40,7 @@ class Server:
 
 serv = Server("Start the Server");
 servername = socket.gethostname();
-serv.createServer(servername,"user","password");    
+serv.createServer(servername);    
 
         
 
