@@ -5,16 +5,15 @@ from ftplib import FTP
 
 class Client:
     def __init__(self,message):
-        ''''
-        self.username = raw_input("input username: ");
-        self.password = raw_input("input password: ");
-        '''
         self.message = message;
         print message;
+        
+        #Grab login information from client
         self.servername = raw_input("input the servers name: ");
-        self.username = "user";
-        self.password = "password";
-           
+        self.username = raw_input("input username: ");
+        self.password = raw_input("input password: ");
+      
+        
     def connectToFtp(self):
         #attempt login to FTP
         ftp = FTP();
