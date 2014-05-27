@@ -11,17 +11,17 @@ class Server:
         self.startMessage = startMessage;
         print self.startMessage;
     
-    
-    
     def createServer(self,ipaddr):
         authorizer = DummyAuthorizer();
         
         ''' create a user
             All login information is stored as plaintext right now.
         '''
-        authorizer.add_user("user","password", "/users/ryanwilcox/server", perm="elradfmwM",
+        authorizer.add_user("user","password", "/users/ryanwilcox/server/user", perm="elradfmwM",
         msg_login = "You are logged in.", msg_quit = "bye.");
-    
+        
+        authorizer.add_user("user2","passwd","/users/ryanwilcox/server/user2",perm="elradfmwM"
+        msg_login = "You are logged in", msg_quit = "bye!.");
         #anon user
         authorizer.add_anonymous("/users/ryanwilcox/server");
     
